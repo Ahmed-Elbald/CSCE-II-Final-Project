@@ -10,10 +10,13 @@ CONFIG += c++17
 
 SOURCES += \
     block.cpp \
+    coinsdisplay.cpp \
     game.cpp \
     level.cpp \
+    life.cpp \
     main.cpp \
     player.cpp \
+    score.cpp \
     settingsmanager.cpp \
     shieldeffect.cpp \
     sound.cpp \
@@ -21,13 +24,16 @@ SOURCES += \
     state.cpp \
     trap.cpp \
     utils.cpp \
-    # coin.cpp
+    coin.cpp
 
 HEADERS += \
     block.h \
+    coinsdisplay.h \
     game.h \
     level.h \
+    life.h \
     player.h \
+    score.h \
     settingsmanager.h \
     shieldeffect.h \
     sound.h \
@@ -35,7 +41,7 @@ HEADERS += \
     state.h \
     trap.h \
     utils.h \
-    # coin.h
+    coin.h
 
 FORMS +=
 

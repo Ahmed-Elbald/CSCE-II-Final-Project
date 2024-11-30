@@ -2,13 +2,34 @@
 #include "qtimer.h"
 #include "settingsmanager.h"
 
-SpriteSheet::SpriteSheet(QString name) {
-    // Initialize timer
-    animationTimer = new QTimer(this);
 
-    // Set name
-    this->name = name;
+// Static variables
+QTimer *SpriteSheet::animationTimer = nullptr;
+QList<SpriteSheet*> SpriteSheet::instances;
+
+// Static functions
+void SpriteSheet::advanceAllFrames() {
+    for (SpriteSheet* instance : instances) {
+        instance->advanceFrames();
+    }
 }
+
+// Constructor
+SpriteSheet::SpriteSheet(QString name, AnimationType type) {
+    this->name = name;
+    this->type = type;
+
+    // Add this instance to the list
+    instances.append(this);
+
+    // Initialize and start the shared timer if it hasn't been started already
+    if (animationTimer == nullptr) {
+        animationTimer = new QTimer(this);
+        connect(animationTimer, &QTimer::timeout, this, &SpriteSheet::advanceAllFrames);
+        animationTimer->start(SM.settings->value("spriteUpdateInterval").toInt());
+    }
+}
+
 
 // Logic
 void SpriteSheet::setProperties(int frameWidth, int frameHeight, int xOffset, int yOffset, int contentWidth, int contentHeight) {
@@ -20,32 +41,30 @@ void SpriteSheet::setProperties(int frameWidth, int frameHeight, int xOffset, in
     this->contentHeight = contentHeight;
 }
 
-void SpriteSheet::setSpritePixmap(QPixmap pix) {
-    originalPixmap = pix;
+void SpriteSheet::setSpritePixmap(QPixmap pix, AnimationType type) {
 
-    qDebug() << "sent:" << pix.width() << pix.height();
-    qDebug() << "original:" << originalPixmap.width() << originalPixmap.height();
-    qDebug() << "Porperties:" << frameWidth;
+    if (frameWidth == 0)
+        throw std::runtime_error("Properties must be set before pixmap");
 
-    frameCount = pix.width() / frameWidth;
-
-}
-
-void SpriteSheet::animateSprite(AnimationType type) {
-
+    // Reset frame
     currentSpriteFrame = 0;
 
-    disconnect(animationTimer, &QTimer::timeout, this, nullptr);
-    connect(animationTimer, &QTimer::timeout, this, [=](){
-        advanceFrames(type);
-    });
+    // Set new type
+    this->type = type;
 
-    advanceFrames(type);
-    animationTimer->stop();
-    animationTimer->start(SM.settings->value("spriteUpdateInterval").toInt());
+    // Set new pixmap
+    originalPixmap = pix;
+
+    // Calculate new frame count
+    frameCount = pix.width() / frameWidth;
+
+    // Set the first frame
+    advanceFrames();
+
 }
 
-void SpriteSheet::advanceFrames(AnimationType type) {
+
+void SpriteSheet::advanceFrames() {
     // If it is a repeating action, loop the animation
     if (type == repeating)
         currentSpriteFrame = (currentSpriteFrame + 1) % frameCount;
@@ -78,8 +97,13 @@ int SpriteSheet::getContentHeight() { return contentHeight; }
 
 // Destructor
 SpriteSheet::~SpriteSheet() {
-    if (animationTimer != nullptr) {
+    // Remove this instance from the list
+    instances.removeAll(this);
+
+    // Stop and delete the timer if there are no more instances
+    if (instances.isEmpty() && animationTimer != nullptr) {
         animationTimer->stop();
         delete animationTimer;
+        animationTimer = nullptr;
     }
 }

@@ -25,6 +25,11 @@ SettingsManager::SettingsManager() {
     settings->setValue("window/defaultEndOffset", 100);
     settings->setValue("window/width", 800);
     settings->setValue("window/height", 600);
+    settings->setValue("window/coinsDisplayerXOffset", 40);
+    settings->setValue("window/coinsDisplayerYOffset", 0);
+    settings->setValue("window/coinsDisplayerFont", "Times");
+    settings->setValue("window/coinsDisplayerFontSize", 25);
+    settings->setValue("window/coinsDisplayerImage", ":/Assets/images/coin.png");
 
     // Scene
     settings->setValue("scene/defaultHeight", 600);
@@ -80,13 +85,13 @@ SettingsManager::SettingsManager() {
     settings->setValue("player/collisionTimerInterval", 16);
   
     // Coin
-    settings->setValue("coin/spriteSheet/1", ":/Assets/images/coin1.png");
-    settings->setValue("coin/spriteSheet/2", ":/Assets/images/coin2.png");
+    settings->setValue("coin/spriteSheet/1", ":/Assets/images/Coins/coin1.png");
+    settings->setValue("coin/spriteSheet/2", ":/Assets/images/Coins/coin2.png");
     settings->setValue("coin/spriteWidth", 180);
     settings->setValue("coin/spriteHeight", 20);
 
-    settings->setValue("coin/volume", 0.125);
-    settings->setValue("audio/coinPickUp/1", "qrc:/Assets/audio/capture_coin.mp3");
+    settings->setValue("coin/volume", 0.2);
+    settings->setValue("audio/coinPickUp/1", "qrc:/Assets/audio/capture_coin.wav");
     settings->setValue("audio/coinPickUp/2" , "qrc:/Assets/audio/coin_pickup.mp3");
     settings->setValue("audio/coinPickUp/3" , "qrc:/Assets/audio/coin_pickup_2.mp3");
 

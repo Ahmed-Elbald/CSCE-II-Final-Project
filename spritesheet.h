@@ -10,8 +10,13 @@ class SpriteSheet : public QObject, public QGraphicsPixmapItem
 {
     Q_OBJECT
 private:
+    // Static timer
+    static QTimer *animationTimer;
+    static QList<SpriteSheet*> instances;
+
     // Name for sprite sheet
     QString name;
+    AnimationType type;
 
     // Number of frames in the sheet (Calculated in the constructor)
     int frameCount;
@@ -32,19 +37,17 @@ private:
     QPixmap originalPixmap;
 
     // Animation
-    QTimer *animationTimer = nullptr;
     int currentSpriteFrame = 0;
 
 public:
 
 public:
-    SpriteSheet(QString name = "");
+    SpriteSheet(QString name = "", AnimationType type = repeating);
     ~SpriteSheet();
 
     // Logic
     void setProperties(int frameWidth, int frameHeight, int xOffset, int yOffset, int contentWidth, int contentHeight);
-    void setSpritePixmap(QPixmap pixmap);
-    void animateSprite(AnimationType = repeating);
+    void setSpritePixmap(QPixmap pixmap, AnimationType type = repeating);
 
     // Getters
     QString getName();
@@ -59,7 +62,11 @@ public:
 
 private:
     // Helper
-    void advanceFrames(AnimationType);
+    void advanceFrames();
+
+private slots:
+    // Slot to advance frames for all instances
+    static void advanceAllFrames();
 
 };
 

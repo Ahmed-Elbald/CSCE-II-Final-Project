@@ -61,13 +61,14 @@
         <file>Assets/images/bg_3.jpg</file>
         <file>Assets/images/bg_4.jpg</file>
         <file>Assets/images/bg_5.jpg</file>
+        <file>Assets/images/scoretext.png</file>
         <file>Assets/audio/capture_coin.wav</file>
         <file>Assets/audio/game_success.wav</file>
         <file>Assets/images/Coins/coin1.png</file>
         <file>Assets/images/Coins/coin2.png</file>
-
         <file>Assets/images/end_flag.png</file>
         <file>Assets/audio/level_win_sound.mp3</file>
         <file>Assets/audio/victory_sound.mp3</file>
+        <file>Assets/images/coin.png</file>
     </qresource>
 </RCC>

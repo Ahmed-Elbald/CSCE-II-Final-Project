@@ -4,7 +4,6 @@
 #include <QString>
 #include <QVector>
 #include <QGraphicsItem>
-#include <random>
 
 enum PlayerActions {
     IDLE,

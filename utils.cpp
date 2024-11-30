@@ -1,4 +1,5 @@
 #include "utils.h"
+#include <random>
 
 const QVector<QString> PLAYER_ACTIONS = {
     "idle",

@@ -24,21 +24,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="533b5683-1d24-49b3-a018-6422c8e1bbee" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/images/Blocks/1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/images/Blocks/2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/images/Blocks/3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/images/Spikes/1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/block.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/block.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/settingsmanger.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/trap.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/trap.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SuperMarioRefined.pro" beforeDir="false" afterPath="$PROJECT_DIR$/SuperMarioRefined.pro" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/coin.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/coin.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/coin.h" beforeDir="false" afterPath="$PROJECT_DIR$/coin.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/coinsdisplay.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/coinsdisplay.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/coinsdisplay.h" beforeDir="false" afterPath="$PROJECT_DIR$/coinsdisplay.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/game.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/game.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/game.h" beforeDir="false" afterPath="$PROJECT_DIR$/game.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/player.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/player.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/player.h" beforeDir="false" afterPath="$PROJECT_DIR$/player.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources.qrc" beforeDir="false" afterPath="$PROJECT_DIR$/resources.qrc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/settingsmanager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/settingsmanager.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/state.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/state.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -87,7 +82,7 @@
     &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
     &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
     &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;coins&quot;,
     &quot;last_opened_file_path&quot;: &quot;/Users/ayman/Programming/Projects/CSCE-II-Final-Project&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -106,6 +101,11 @@
       </method>
     </configuration>
     <configuration name="Game" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" CONFIG_NAME="Debug" RUN_PATH="main.cpp" EXPLICIT_BUILD_TARGET_NAME="all">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>

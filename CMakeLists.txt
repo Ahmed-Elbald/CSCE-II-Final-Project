@@ -57,6 +57,11 @@ add_executable(CSCE_II_Final_Project
         coin.cpp
         coin.h
 
+        coinsdisplay.cpp
+        coinsdisplay.h
+
+
+
 )
 
 # Link the Qt libraries to the target

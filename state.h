@@ -1,22 +1,26 @@
 #ifndef STATE_H
 #define STATE_H
-
+#include"score.h"
 #include "qobject.h"
 
 class State : public QObject
 {
     Q_OBJECT
 private:
-    int coins;
+    int coins = 0;
     int lives;
+    int score =0 ;
+    Score* scorePtr;
     int level = 1;
     bool isGameOver = false;
     bool isPaused = false;
+
 public:
     State();
 
     // Getters
     int getCoins();
+    int getScore();
     int getLives();
     int getLevel();
     bool getIsGameOver();
@@ -24,15 +28,21 @@ public:
 
     // Setters
     void setCoins(int coins);
+    //void setScore(int score);
     void setLives(int lives);
     void setLevel(int level);
     void setIsGameOver(bool isGameOver);
     void setIsPaused(bool isPaused);
     void incrementCoins();
-    void decrementLives();
+    void decrementCoins();
+    //void incrementScore();
+   //void decrementScore();
     void increamentLives();
+    void decrementLives();
 
     // Signals
+
+
 signals:
     void stateChanged();
 };
