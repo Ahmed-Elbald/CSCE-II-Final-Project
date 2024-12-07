@@ -1,5 +1,4 @@
 #include "lifedisplay.h"
-//#include "settingsmanager.h"
 #include <QGridLayout>
 #include <QPixmap>
 
@@ -13,7 +12,7 @@ LifeDisplay::LifeDisplay(State* state, QWidget* parent)
 
     layout = new QGridLayout(this);
 
-    this->setFixedSize(230, 60); // Set the fixed size of the widget
+    this->setFixedSize(250, 70); // Set the fixed size of the widget
     this->setStyleSheet("background-color: transparent;");
 
     // Initialize the heart display with ful hearts
