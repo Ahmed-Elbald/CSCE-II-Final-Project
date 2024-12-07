@@ -99,10 +99,18 @@ SettingsManager::SettingsManager() {
     settings->setValue("coin/spriteWidth", 180);
     settings->setValue("coin/spriteHeight", 20);
 
+    // Coin sprite properties
+    settings->setValue("coin/spriteFrameWidth", 20);
+    settings->setValue("coin/spriteFrameHeight", 20);
+    settings->setValue("coin/spriteContentOffsetX", 0);
+    settings->setValue("coin/spriteContentOffsetY", 0);
+    settings->setValue("coin/spriteContentWidth", 20);
+    settings->setValue("coin/spriteContentHeight", 20);
     settings->setValue("coin/volume", 0.2);
     settings->setValue("audio/coinPickUp/1", "qrc:/Assets/audio/capture_coin.wav");
     settings->setValue("audio/coinPickUp/2" , "qrc:/Assets/audio/coin_pickup.mp3");
     settings->setValue("audio/coinPickUp/3" , "qrc:/Assets/audio/coin_pickup_2.mp3");
+    settings->setValue("coin/scale", 2);
 
     // Enemy
     settings->setValue("enemy/spriteSheetPath", ":/Assets/images/NightBorne/NightBorne.png");
@@ -119,6 +127,7 @@ SettingsManager::SettingsManager() {
     settings->setValue("enemy/spriteSheet/beaten", 5*80); // 5 frames
     settings->setValue("enemy/spriteSheet/fight", 6*80); // 6 frames
     settings->setValue("enemy/spriteSheet/die", 23*80); // 23 frames
+    settings->setValue("enemy/scale", 2);
 
     // Order in Spritesheet (0 based)
     settings->setValue("enemy/spriteSheet/idle/order", 0);
@@ -133,13 +142,35 @@ SettingsManager::SettingsManager() {
     settings->setValue("enemy/fightRange", 50);
     settings->setValue("enemy/checkPlayerInterval", 50);
     settings->setValue("enemy/walkTimerInterval", 25);
+    settings->setValue("enemy/startX", 800);
 
     // Sprites
     settings->setValue("spriteUpdateInterval", 75);
 
 
+
+    // Obstacles
+    settings->setValue("blocks/startX", 800);
+    settings->setValue("blocks/height", 48);
+    settings->setValue("blocks/width", 48);
+    settings->setValue("blocks/distanceFromGround",100);
+    settings->setValue("blocks/collectionNumber", 10);
+    settings->setValue("blocks/collectionDistance", 150);
+    settings->setValue("blocks/scale", 1);
+    settings->setValue("blocks/numberOfCollections", 25);
+    settings->setValue("levelEndOffset", 200);
+
+
+    // Ratios
+    settings->setValue("ratios/coin", 4);
+    settings->setValue("ratios/healthPotion", 50);
+    settings->setValue("pickUps/height", 100);
+    settings->setValue("spikes/scale", 4);
+    settings->setValue("ratios/enemy", 100);
+
     // Potions
     settings->setValue("potion/health/path", ":/Assets/images/Health.png");
+    settings->setValue("potion/health/scale", 1.5);
 }
 
 SettingsManager::~SettingsManager() {

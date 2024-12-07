@@ -16,7 +16,7 @@
 #include <QGraphicsProxyWidget>
 #include "enemy.h"
 #include "healthpotion.h"
-#include <soundplayer.h>
+#include "soundplayer.h"
 
 
 Game::Game() {
@@ -92,6 +92,8 @@ void Game::init() {
 
 void Game::startCurrentLevel() {
 
+
+
     // Initialize level
     if (level != nullptr)
         delete level;
@@ -130,6 +132,9 @@ void Game::startCurrentLevel() {
     // Set scroll policies to hide scrollbars
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+
+
+    clearMap();
 
     // Create obstacles
     createMap();
@@ -216,59 +221,80 @@ void Game::moveWithPlayer() {
 
 }
 
-// TODO: Position them according to ground level
-void Game::createMap() {
 
-    // Enemy
-    Enemy *enemy = new Enemy(600, this->getGroundLevel() - 125  , 2);
-    elements.push_back(enemy);
-    scene->addItem(enemy);
-
-
-
-    // // Create coins
-    QString path = SM.settings->value("coin/spriteSheet/1").toString();
-
-    // // // Create pixmap
-    for ( int i = 0 ; i < 40 ; i++){
-        Coin *coin = new Coin(800+ i*200, this->getGroundLevel() -200 , 2 , 1 , path);
-        elements.push_back(coin);
-        scene->addItem(coin);
-    }
-
-
-    QString path2 = SM.settings->value("spikes/1").toString();
-    for ( int i = 0 ; i < 40 ; i++){
-        Trap *trap = new Trap(800+ i*200, this->getGroundLevel() - 11 , path2 ,2 );
-        elements.push_back(trap);
-        scene->addItem(trap);
-    }
-
-    QString path3 = SM.settings->value("blocks/2").toString();
-
-    for ( int i = 0 ; i < 20 ; i++){
-        Block *block = new Block(700+ i*150, 385 ,   path3 , 1 );
-        elements.push_back(block);
-        scene->addItem(block);
-        // Put Potions Randomly
-        int random = RandomNumber(0, 1);
-        if (random > 0){
-            auto *potion = new HealthPotion(700 + i*150  , 300  , 1.5 , SM.settings->value("potion/health/path").toString());
-            elements.push_back(potion);
-            scene->addItem(potion);
+void Game::clearMap() {
+    for ( auto element : scene->items()){
+        for ( auto type : mapTypes){
+            if ( !element ){
+                continue;
+            }
+            if ( element->type() == type ){
+                scene->removeItem(element);
+            }
         }
     }
+    elements.clear();
+}
 
-    QString path4 = SM.settings->value("blocks/3").toString();
 
-    for ( int i = 0 ; i < 14 ; i++){
-        Block *block = new Block(2800+ i*150, 300 - i*10 ,   path4 , 1);
-        elements.push_back(block);
-        scene->addItem(block);
-        // Put Potions Randomly
 
+void Game::createMap() {
+
+    int blockStartX = SM.settings->value("blocks/startX").toInt();
+    int blockHeight = SM.settings->value("blocks/height").toInt();
+    int blockDistanceFromGround = SM.settings->value("blocks/distanceFromGround").toInt();
+    QString coinPath = SM.settings->value("coin/spriteSheet/1").toString();
+    QString spike1Path = SM.settings->value("spikes/1").toString();
+    QString block1Path= SM.settings->value("blocks/1").toString();
+    QString block2Path = SM.settings->value("blocks/2").toString();
+    int blockWidth = SM.settings->value("blocks/width").toInt();
+    int coinRatio = SM.settings->value("ratios/coin").toInt();
+    int healthPotionRatio = SM.settings->value("ratios/healthPotion").toInt();
+    QString healthPotionPath = SM.settings->value("potion/health/path").toString();
+    int pickUpHeight = SM.settings->value("pickUps/height").toInt();
+    int potionScale = SM.settings->value("potion/health/scale").toInt();
+    int coinScale = SM.settings->value("coin/scale").toInt();
+    int enemyScale = SM.settings->value("enemy/scale").toInt();
+    int blockScale = SM.settings->value("blocks/scale").toInt();
+    int blockCollectionNumber = SM.settings->value("blocks/collectionNumber").toInt();
+    int blockCollectionDistance = SM.settings->value("blocks/collectionDistance").toInt();
+    int enemyHeight = SM.settings->value("enemy/spriteFrameHeight").toInt();
+    int spikeScale = SM.settings->value("spikes/scale").toInt();
+    int enemyRatio = SM.settings->value("ratios/enemy").toInt();
+    int numberOfCollections = SM.settings->value("blocks/numberOfCollections").toInt();
+
+
+    for ( int i = 0 ; i < numberOfCollections ; i++){
+        for ( int  j = 0 ; j < blockCollectionNumber ; j++ ){
+            qreal X = (blockStartX + blockWidth*j) + (blockCollectionNumber*blockWidth + blockCollectionDistance)*(i) ;
+            qreal Y = this->getGroundLevel() - blockDistanceFromGround;
+            auto *block = new Block( X , Y  ,   block1Path , blockScale );
+            addElement(block);
+            // Create potions and coins randomly
+            int randomCoin = RandomNumber(0, coinRatio);
+            int randomPotion = RandomNumber(0, healthPotionRatio);
+            if (!randomCoin){
+                Coin *coin = new Coin(X, Y  -pickUpHeight , coinScale , 1 , coinPath);
+                addElement(coin);
+            }
+            if (!randomPotion){
+                auto *potion = new HealthPotion(X , Y - pickUpHeight , potionScale , healthPotionPath);
+                addElement(potion);
+            }
+
+            // Create Enemy Randomly
+            int randomEnemy = RandomNumber(0, enemyRatio);
+            if (!randomEnemy){
+                auto *enemy = new Enemy(X, Y - blockHeight - enemyHeight, enemyScale);
+                addElement(enemy);
+            }
+            // Create Spike
+            if ( j == blockCollectionNumber -1 ){
+                auto *trap = new Trap(X + blockWidth, getGroundLevel() - 20 , spike1Path , spikeScale );
+                addElement(trap);
+            }
+        }
     }
-
 }
 
 void Game::mapDisplayersToScene() {
@@ -306,6 +332,19 @@ int Game::getSceneWidth() {
 
 int Game::getSceneHeight() {
     return level->getSceneHeight();
+}
+
+void Game::addElement(QGraphicsPixmapItem *element) {
+
+    int endOffset = SM.settings->value("levelEndOffset").toInt();
+
+    if ( element->x() > scene->width() -  endOffset || element->x() < 0 )
+    {
+        return;
+    }
+
+    elements.push_back(element);
+    scene->addItem(element);
 }
 
 

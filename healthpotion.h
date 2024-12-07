@@ -10,7 +10,8 @@ class HealthPotion :public QObject, public QGraphicsPixmapItem
 Q_OBJECT
 public:
     HealthPotion( qreal x , qreal y , qreal scale ,QString path);
-    int type() const override { return PowerUpType; }
+    int type() const override;
+    ~HealthPotion();
 
 };
 

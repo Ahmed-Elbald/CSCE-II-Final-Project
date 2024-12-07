@@ -22,6 +22,13 @@ private:
 public:
     // TODO: Make them private and modify that everywhere
     QVector<QGraphicsPixmapItem*> elements;
+    QVector<CustomTypes> mapTypes = {
+        BlockType,
+        TrapType,
+        CoinType,
+        EnemyType,
+        HealthPotionType
+    };
     State *state = nullptr;
     Level *level = nullptr;
     CoinsDisplay *coinsDisplayer = nullptr; // TODO: Make it private
@@ -54,9 +61,11 @@ private:
     void close();
 
     // Helpers
+    void clearMap();
     void createMap();
     void moveWithPlayer();
     void mapDisplayersToScene();
+    void addElement(QGraphicsPixmapItem *element);
 
 private slots:
     // Slots

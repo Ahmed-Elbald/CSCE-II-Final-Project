@@ -11,3 +11,14 @@ HealthPotion::HealthPotion(qreal x, qreal y, qreal scale,  QString path)
     qDebug() << "HealthPotion created at " << x << " " << y;
 
 }
+
+HealthPotion::~HealthPotion()
+{
+    qDebug() << "HealthPotion deleted";
+}
+
+// type
+int HealthPotion::type() const
+{
+    return HealthPotionType;
+}

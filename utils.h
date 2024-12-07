@@ -23,8 +23,8 @@ enum CustomTypes {
     TrapType,
     ShieldType,
     CoinType,
-    PowerUpType,
-    EnemyType
+    EnemyType,
+    HealthPotionType
 };
 
 enum AnimationType {

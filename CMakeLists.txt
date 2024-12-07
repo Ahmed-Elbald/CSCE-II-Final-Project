@@ -71,6 +71,12 @@ add_executable(CSCE_II_Final_Project
         healthpotion.cpp
         healthpotion.h
 
+        soundplayer.h
+        soundplayer.cpp
+
+        startingmenu.h
+        startingmenu.cpp
+
 
 )
 

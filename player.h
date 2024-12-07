@@ -101,7 +101,7 @@ private:
     void handleCollision();
     void handleCoinCollision(QGraphicsItem*);
     void handleShieldCollision(QGraphicsItem*);
-    void handlePowerUpCollision(QGraphicsItem*);
+    void handleHealthPotionCollision(QGraphicsItem*);
     void handleDangerCollision(QGraphicsItem*);
 
     // Shields

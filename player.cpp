@@ -403,8 +403,8 @@ void Player::handleCollision() {
             handleCoinCollision(item);
         else if (item->type() == ShieldType)
             handleShieldCollision(item);
-        else if (item->type() == PowerUpType)
-            handlePowerUpCollision(item);
+        else if (item->type() == HealthPotionType)
+            handleHealthPotionCollision(item);
     }
 }
 
@@ -447,7 +447,7 @@ void Player::handleShieldCollision(QGraphicsItem* item) {
     enableShield();
 }
 
-void Player::handlePowerUpCollision(QGraphicsItem* item) {
+void Player::handleHealthPotionCollision(QGraphicsItem* item) {
 
 
     // Remove item from the scene and delete it

@@ -22,7 +22,12 @@ qreal Coin::getVolume() {
 Coin::Coin( qreal x , qreal y , qreal scale , qreal value, QString spriteSheetPath)
 {
     // Set the image
-    setProperties(20, 20, 2, 1, 19, 19);
+    setProperties( SM.settings->value("coin/spriteFrameWidth").toInt(),
+                    SM.settings->value("coin/spriteFrameHeight").toInt(),
+                    SM.settings->value("coin/spriteContentOffsetX").toInt(),
+                    SM.settings->value("coin/spriteContentOffsetY").toInt(),
+                    SM.settings->value("coin/spriteContentWidth").toInt(),
+                    SM.settings->value("coin/spriteContentHeight").toInt());
     setSpritePixmap(QPixmap(spriteSheetPath));
     // Set the position
     setPos(x , y);
