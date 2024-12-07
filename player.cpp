@@ -1,6 +1,7 @@
 #include "player.h"
 #include "game.h"
 #include "soundplayer.h"
+#include <QMessageBox>
 
 Player::Player() {
 
@@ -360,6 +361,15 @@ void Player::handleDying() {
     // decrease the player's lives
     game->state->decrementLives();
 
+    // Handle game over (no more lives)
+    if (game->state->getLives() < 1){
+        QMessageBox::information(nullptr, "Game Over", "You lost! Your final score is: " + QString::number(game->score->getScore()));
+        game->scene->clear();
+        QCoreApplication::quit();
+        exit(EXIT_FAILURE);
+
+    }
+
     // One time die
     die();
 }
@@ -435,6 +445,7 @@ void Player::handleCoinCollision(QGraphicsItem* item) {
 
     // Increase the player's score
     game->state->incrementCoins();
+    game->score->increase();
 }
 
 void Player::handleShieldCollision(QGraphicsItem* item) {

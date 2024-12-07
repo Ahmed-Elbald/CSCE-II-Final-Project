@@ -1,23 +1,27 @@
 #include "lifedisplay.h"
-#include "settingsmanager.h"
+//#include "settingsmanager.h"
 #include <QGridLayout>
 #include <QPixmap>
 
 LifeDisplay::LifeDisplay(State* state, QWidget* parent)
     : QWidget(parent), state(state) {
 
-    // Load the heart images
-    fullHeart.load(SM.settings->value("window/lifeDisplayerFullHeartImage").toString());
-    halfHeart.load(SM.settings->value("window/lifeDisplayerHalfHeartImage").toString());
-    emptyHeart.load(SM.settings->value("window/lifeDisplayerEmptyHeartImage").toString());
+    // Set the heart images
+    fullHeart = QPixmap(":/Assets/images/full_heart.png").scaled(40, 60, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+    emptyHeart = QPixmap(":/Assets/images/empty_heart.png").scaled(40, 60, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+
 
     layout = new QGridLayout(this);
+
+    this->setFixedSize(230, 60); // Set the fixed size of the widget
+    this->setStyleSheet("background-color: transparent;");
 
     // Initialize the heart display with ful hearts
     for (int i = 0; i < 5; ++i) {
         hearts[i] = new QLabel(this);
         hearts[i]->setPixmap(fullHeart);
-        layout->addWidget(hearts[i], 0, i);  // Arrange hearts in a row
+        layout->addWidget(hearts[i], 0, i, Qt::AlignCenter);  // Arrange hearts in a row and align
+
     }
 
     // Connect the stateChanged signal to update the heart display
@@ -25,33 +29,19 @@ LifeDisplay::LifeDisplay(State* state, QWidget* parent)
 }
 
 void LifeDisplay::updateLives() {
-    float lives = state->getLives(); // between 1.0 and 5.0 (the 0.5 stands for half a life)
-    // lives =0 will be "game over"
-    // Determine the number of full, half, and empty hearts
-    int fullHearts = static_cast<int>(lives); // integer part represents the full hearts
-    int halfHearts = (lives - fullHearts >= 0.5) ? 1 : 0; // Half heart if fractional part >= 0.5
-    // int emptyHearts = 5 - fullHearts - halfHearts; // Remaining hearts are empty (the lost ones of the 5)
+    int lives = state->getLives(); // between 1 and 5
+    // lives = 0 will be "game over"
+
+    // Determine the number of full hearts
+    int fullHearts = lives;
 
     // Update the display (loop over the hearts)
     for (int i = 0; i < 5; ++i) {
         if (i < fullHearts) { // show full hearts at the beginning
             hearts[i]->setPixmap(fullHeart);
-        } else if (i < fullHearts + halfHearts) { // followed by the halfs
-            hearts[i]->setPixmap(halfHeart);
-        } else {
+        } else { // Remaining hearts are empty (the lost ones of the 5)
             hearts[i]->setPixmap(emptyHeart);
         }
     }
 }
-/*ex: lives = 3.5
-full hearts = 3
-half hearts = 1
-empty h = 1
 
-loop
-i=0
-shows the 3 full one (until i =2)
-i=3
-shows one half
-after the it just fills the remaining positions with empty hearts
-*/

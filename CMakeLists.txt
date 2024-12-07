@@ -60,8 +60,6 @@ add_executable(CSCE_II_Final_Project
         coinsdisplay.cpp
         coinsdisplay.h
 
-
-
         enemy.cpp
         enemy.h
 
@@ -76,6 +74,12 @@ add_executable(CSCE_II_Final_Project
 
         startingmenu.h
         startingmenu.cpp
+
+        lifedisplay.cpp
+        lifedisplay.h
+
+        score.cpp
+        score.h
 
 
 )

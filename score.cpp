@@ -6,41 +6,45 @@ Score::Score(QGraphicsItem *parent): QGraphicsTextItem(parent) {
     // Initialize the score to 0
     scoreCount = 0;
 
-    // Add the image to represent "Score:"
-    QGraphicsPixmapItem* scoreImage = new QGraphicsPixmapItem(QPixmap(":/Assets/images/scoretext.png"));
-    scoreImage->setParentItem(this); // Attach it as a child *parent is score* (to keep them grouped) this makes its postion "relative" to the score text
-    scoreImage->setPos(-50, -5);     // Position the image relative to the score value
-
     // Set the initial score display
-    setPlainText(QString::number(scoreCount));
+    setPlainText(QString("Score : ") + QString::number(scoreCount));
     setDefaultTextColor(Qt::black);// set color
-    setFont(QFont("Impact", 30));  // set font
-    setPos(50, 0); // set the position of the score value
+    setFont(QFont("Impact", 16));  // set font
+
 
 }
 
 void Score::increase() {
-    // Increment the score and update the display
-    scoreCount++; // counts the number of increase attempts (to increase by a larger amount each time)
-    setPlainText(QString::number(scoreCount * 15));  // increases the count by multiples of 15
+
+    setScore(scoreCount + 5);  // increases the count by  5
 }
 void Score::big_increase() { // for stronger enemies
 
-    scoreCount++; // counts the number of increase attempts (to increase by a larger amount each time)
-    setPlainText(QString::number(scoreCount * 25));  // increases the count by multiples of 25
+    setPlainText(QString::number(scoreCount + 25));  // increases the count by 25
 }
 void Score::decrease() {
     // decrement the score and update the display
 
-    scoreCount--;
-    setPlainText(QString::number(scoreCount * 15));  // decreases the count by multiples of 15
+    if (scoreCount > 0)  // ensure it doesn't go negative
+        setPlainText(QString::number(scoreCount - 5));  // decreases the count by 5
 }
 
 void Score::big_decrease() {
     // decrement the score and update the display
 
-    scoreCount--;
-    setPlainText(QString::number(scoreCount * 25));  // decreases the count by multiples of 25
+    if (scoreCount > 0)
+        setPlainText(QString::number(scoreCount - 5));  // decreases the count by 25
+}
+
+void Score::setScore(int newValue)
+{
+    if (newValue < 0)
+        throw std::invalid_argument("Score cannot be negative");
+
+    scoreCount = newValue;
+    setPlainText(QString("Score : ") + QString::number(scoreCount));
+
+
 }
 
 

@@ -95,5 +95,7 @@
         <file>Assets/audio/button-click-sound.mp3</file>
         <file>Assets/audio/starting-menu-music.mp3</file>
         <file>Assets/audio/powerup-sound.mp3</file>
+        <file>Assets/images/empty_heart.png</file>
+        <file>Assets/images/full_heart.png</file>
     </qresource>
 </RCC>

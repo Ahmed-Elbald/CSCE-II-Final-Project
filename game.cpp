@@ -66,6 +66,12 @@ void Game::init() {
     endFlag = new QGraphicsPixmapItem(QPixmap(SM.settings->value("scene/endFlag").toString()).scaled(75, 115));
     scene->addItem(endFlag);
 
+    // create score
+
+    score = new Score();
+    scene->addItem(score);
+
+
     // Coins displayer
     coinsDisplayer = new CoinsDisplay();
     coinsDisplayer->setPos(
@@ -77,12 +83,8 @@ void Game::init() {
     // Life displayer
     lifeDisplay = new LifeDisplay(state);
     lifeDisplayer = scene->addWidget(lifeDisplay);
-    lifeDisplayer->setPos(
-        SM.settings->value("window/lifeDisplayerXOffset").toInt(),
-        SM.settings->value("window/lifeDisplayerYOffset").toInt()
-        );
 
-    emit state->stateChanged();
+    // emit state->stateChanged();
 
     // Connect state change signal
     connect(state, &State::stateChanged, this, &Game::handleStateChange);
@@ -179,6 +181,7 @@ void Game::close() {
     QApplication::quit();
 }
 
+
 // Slots
 void Game::handlePlayerMovement() {
 
@@ -220,7 +223,6 @@ void Game::moveWithPlayer() {
     centerOn(x, viewport()->height() / 2.0);
 
 }
-
 
 void Game::clearMap() {
     for ( auto element : scene->items()){
@@ -304,6 +306,9 @@ void Game::mapDisplayersToScene() {
         );
     coinsDisplayer->setPos(coinsTopLeft.x(), coinsTopLeft.y());
 
+    QPointF scorePos = mapToScene(viewport()->width() / 2.0 - score->boundingRect().width() / 2.0,  // center horrizontally to the screen
+                                  10);
+    score->setPos(scorePos.x(), scorePos.y());
 
     QPointF lifeTopLeft = mapToScene(
         SM.settings->value("window/lifeDisplayerXOffset").toInt(),

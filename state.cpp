@@ -8,6 +8,7 @@ State::State() {
 
 // Getters
 int State::getCoins() { return coins; }
+int State::getScore() { return score; }
 int State::getLives() { return lives; }
 int State::getLevel() { return level; }
 bool State::getIsGameOver() { return isGameOver; }
@@ -20,6 +21,12 @@ void State::setCoins(int coins) {
     this->coins = coins;
     emit stateChanged();
 }
+// void State::setScore(int score) {
+//     if (score < 0)
+//         throw std::invalid_argument("Coins cannot be negative");
+//     this->score = score;
+//     emit stateChanged();
+// }
 void State::setLives(int lives) {
     qDebug() << "From set lives" << lives;
     if (lives < 0 || lives > 5)
@@ -39,17 +46,12 @@ void State::setIsGameOver(bool isGameOver) { this->isGameOver = isGameOver; emit
 void State::setIsPaused(bool isPaused) { this->isPaused = isPaused; emit stateChanged(); }
 void State::incrementCoins() { setCoins(getCoins() + 1); emit stateChanged(); }
 void State::decrementCoins() { setCoins(getCoins() - 1); emit stateChanged(); }
+//void State::incrementScore() { scorePtr->increase(); emit stateChanged(); }
+//void State::decrementScore() { scorePtr->decrease(); emit stateChanged(); }
+
 void State::decrementLives() { setLives(getLives() - 1); emit stateChanged(); }
-void State::incrementLives() { setLives(std::min(getLives() + 1, 5)); emit stateChanged(); }
+void State::incrementLives() { setLives(std::min(getLives() + 1, 5)); emit stateChanged(); } // max is five lives
 
-/* call update updateLives() and send the updated lives to it
 
-the half heart approach:
- - if the player hits a small enemy or gets a small reward , they will lose/gain half a life
- - the "lives" variable will need to be changed to float
- - the following two function will be added to increment/decrement half a life:
 
-void State::decrement_half_Lives() { setLives(getLives() - 0.5); emit stateChanged(); }
-void State::increament_half_Lives() { setLives(getLives() + 0.5); emit stateChanged(); }
 
-*/
