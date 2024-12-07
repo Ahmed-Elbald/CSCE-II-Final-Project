@@ -8,7 +8,7 @@ class SettingsManager {
 public:
     SettingsManager();
     ~SettingsManager();
-    QSettings * settings;
+    QSettings * settings = nullptr;
 
 };
 

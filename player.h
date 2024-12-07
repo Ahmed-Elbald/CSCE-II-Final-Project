@@ -10,7 +10,6 @@
 #include <QTimer>
 #include <QPixmap>
 #include <QImage>
-#include "sound.h"
 #include <QKeyEvent>
 #include <QDebug>
 #include <QKeyEvent>

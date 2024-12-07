@@ -17,7 +17,7 @@ class LifeDisplay: public QWidget
 
         void updateLives();
     private:
-        State* state;                  // The player's state (lives)
+        State* state = nullptr;                  // The player's state (lives)
         QLabel* hearts[5];             // Array of QLabel to display hearts
         int MaxNumOfLives =5;
         QPixmap fullHeart;             // Image for a full heart

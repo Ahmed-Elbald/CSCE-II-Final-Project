@@ -87,3 +87,12 @@ void StartingMenu::exitGame() {
     if (reply == QMessageBox::Yes)
         emit exitGameSignal();
 }
+
+StartingMenu::~StartingMenu() {
+    if (gameTitle != nullptr)
+        delete gameTitle;
+    if (startButton != nullptr)
+        delete startButton;
+    if (exitButton != nullptr)
+        delete exitButton;
+}

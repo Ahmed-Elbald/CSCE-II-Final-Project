@@ -175,7 +175,8 @@ SettingsManager::SettingsManager() {
 
 SettingsManager::~SettingsManager() {
     // Delete the settings object
-    delete settings;
+    if (settings != nullptr)
+        delete settings;
 }
 
 SettingsManager SM = SettingsManager();

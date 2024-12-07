@@ -23,6 +23,7 @@ private:
 public:
     // TODO: Make them private and modify that everywhere
     QVector<QGraphicsPixmapItem*> elements;
+
     QVector<CustomTypes> mapTypes = {
         BlockType,
         TrapType,
@@ -30,6 +31,7 @@ public:
         EnemyType,
         HealthPotionType
     };
+
     State *state = nullptr;
     Level *level = nullptr;
     CoinsDisplay *coinsDisplayer = nullptr; // TODO: Make it private
@@ -37,7 +39,7 @@ public:
     QGraphicsProxyWidget *lifeDisplayer = nullptr; // TODO: Make it private
     QGraphicsScene* scene = nullptr;
     Player * player = nullptr;
-    Score * score;
+    Score * score = nullptr;
 
 public:
 

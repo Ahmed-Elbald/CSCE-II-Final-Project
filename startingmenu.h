@@ -10,11 +10,12 @@ class StartingMenu : public QWidget {
 
 public:
     explicit StartingMenu(QWidget *parent = nullptr);
+    ~StartingMenu();
 
 private:
-    QLabel *gameTitle;    // Displays the game name
-    QPushButton *startButton; // Start button
-    QPushButton *exitButton;   // Exit button
+    QLabel *gameTitle = nullptr;    // Displays the game name
+    QPushButton *startButton = nullptr; // Start button
+    QPushButton *exitButton = nullptr;   // Exit button
 
     void setupUI();       // Sets up the UI layout
 

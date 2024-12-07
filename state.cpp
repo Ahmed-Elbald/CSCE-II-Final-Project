@@ -21,21 +21,20 @@ void State::setCoins(int coins) {
     this->coins = coins;
     emit stateChanged();
 }
-// void State::setScore(int score) {
-//     if (score < 0)
-//         throw std::invalid_argument("Coins cannot be negative");
-//     this->score = score;
-//     emit stateChanged();
-// }
+
 void State::setLives(int lives) {
-    qDebug() << "From set lives" << lives;
     if (lives < 0 || lives > 5)
         throw std::invalid_argument("Lives must be between 1 and 5");
     this->lives = lives;
     emit stateChanged();
 }
 void State::setLevel(int level) {
-    qDebug() << "From set level";
+    if (level == 6) {
+        this->level = level;
+        isGameOver = true;
+        emit stateChanged();
+        return;
+    }
     if (level < 1 || level > 5)
         throw std::invalid_argument("Level must be between 1 and 5");
     this->level = level;

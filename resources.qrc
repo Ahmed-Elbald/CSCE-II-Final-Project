@@ -9,42 +9,11 @@
         <file>Assets/images/Fighter/Run.png</file>
         <file>Assets/images/Fighter/Shield.png</file>
         <file>Assets/images/Fighter/Walk.png</file>
-        <file>Assets/images/Soldier_1/Attack.png</file>
-        <file>Assets/images/Soldier_1/Dead.png</file>
-        <file>Assets/images/Soldier_1/Explosion.png</file>
-        <file>Assets/images/Soldier_1/Grenade.png</file>
-        <file>Assets/images/Soldier_1/Hurt.png</file>
-        <file>Assets/images/Soldier_1/Idle.png</file>
-        <file>Assets/images/Soldier_1/Recharge.png</file>
-        <file>Assets/images/Soldier_1/Run.png</file>
-        <file>Assets/images/Soldier_1/Shot_1.png</file>
-        <file>Assets/images/Soldier_1/Shot_2.png</file>
-        <file>Assets/images/Soldier_1/Walk.png</file>
-        <file>Assets/images/Shinobi/Attack_1.png</file>
-        <file>Assets/images/Shinobi/Attack_2.png</file>
-        <file>Assets/images/Shinobi/Attack_3.png</file>
-        <file>Assets/images/Shinobi/Dead.png</file>
-        <file>Assets/images/Shinobi/Hurt.png</file>
-        <file>Assets/images/Shinobi/Idle.png</file>
-        <file>Assets/images/Shinobi/Jump.png</file>
-        <file>Assets/images/Shinobi/Run.png</file>
-        <file>Assets/images/Shinobi/Shield.png</file>
-        <file>Assets/images/Shinobi/Walk.png</file>
         <file>Assets/audio/bg_music_1.mp3</file>
         <file>Assets/audio/bg_music_2.wav</file>
         <file>Assets/audio/man_jumps_1.wav</file>
         <file>Assets/audio/man_jumps_2.wav</file>
         <file>Assets/audio/man_walks.wav</file>
-        <file>Assets/images/Raider_2/Attack.png</file>
-        <file>Assets/images/Raider_2/Dead.png</file>
-        <file>Assets/images/Raider_2/Hurt.png</file>
-        <file>Assets/images/Raider_2/Idle.png</file>
-        <file>Assets/images/Raider_2/Jump.png</file>
-        <file>Assets/images/Raider_2/Recharge.png</file>
-        <file>Assets/images/Raider_2/Run.png</file>
-        <file>Assets/images/Raider_2/Shot_1.png</file>
-        <file>Assets/images/Raider_2/Shot_2.png</file>
-        <file>Assets/images/Raider_2/Walk.png</file>
         <file>Assets/images/Spikes/1.png</file>
         <file>Assets/images/Blocks/1.png</file>
         <file>Assets/images/Blocks/2.png</file>
@@ -72,26 +41,6 @@
         <file>Assets/images/coin.png</file>
         <file>Assets/images/NightBorne/NightBorne.png</file>
         <file>Assets/images/Health.png</file>
-        <file>Assets/images/Samurai/Attack_1.png</file>
-        <file>Assets/images/Samurai/Attack_2.png</file>
-        <file>Assets/images/Samurai/Attack_3.png</file>
-        <file>Assets/images/Samurai/Hurt.png</file>
-        <file>Assets/images/Samurai/Idle.png</file>
-        <file>Assets/images/Samurai/Jump.png</file>
-        <file>Assets/images/Samurai/Run.png</file>
-        <file>Assets/images/Samurai/Shield.png</file>
-        <file>Assets/images/Samurai/Walk.png</file>
-        <file>Assets/images/Raider_1/Attack_1.png</file>
-        <file>Assets/images/Raider_1/Attack_2.png</file>
-        <file>Assets/images/Raider_1/Hurt.png</file>
-        <file>Assets/images/Raider_1/Idle.png</file>
-        <file>Assets/images/Raider_1/Jump.png</file>
-        <file>Assets/images/Raider_1/Recharge.png</file>
-        <file>Assets/images/Raider_1/Run.png</file>
-        <file>Assets/images/Raider_1/Shot.png</file>
-        <file>Assets/images/Raider_1/Walk.png</file>
-        <file>Assets/images/Samurai/Die.png</file>
-        <file>Assets/images/Raider_1/Die.png</file>
         <file>Assets/audio/button-click-sound.mp3</file>
         <file>Assets/audio/starting-menu-music.mp3</file>
         <file>Assets/audio/powerup-sound.mp3</file>

@@ -2,6 +2,7 @@
 #include "block.h"
 #include "lifedisplay.h"
 #include "qapplication.h"
+#include "qmessagebox.h"
 #include "soundplayer.h"
 #include "trap.h"
 #include "settingsmanager.h"
@@ -67,8 +68,8 @@ void Game::init() {
     scene->addItem(endFlag);
 
     // create score
-
     score = new Score();
+    score->setPos(viewport()->width() / 2.0 - score->boundingRect().width() / 2.0, 10);
     scene->addItem(score);
 
 
@@ -83,8 +84,13 @@ void Game::init() {
     // Life displayer
     lifeDisplay = new LifeDisplay(state);
     lifeDisplayer = scene->addWidget(lifeDisplay);
+    lifeDisplayer->setPos(
+        SM.settings->value("window/lifeDisplayerXOffset").toInt(),
+        SM.settings->value("window/lifeDisplayerYOffset").toInt()
+        );
 
-    // emit state->stateChanged();
+    emit state->stateChanged();
+
 
     // Connect state change signal
     connect(state, &State::stateChanged, this, &Game::handleStateChange);
@@ -99,6 +105,9 @@ void Game::startCurrentLevel() {
     // Initialize level
     if (level != nullptr)
         delete level;
+
+    mapDisplayersToScene();
+
 
     this->setWindowTitle("RUN - Level " + QString::number(state->getLevel()));
 
@@ -212,6 +221,39 @@ void Game::KeyPressEvent(QKeyEvent *event)
 }
 
 void Game::handleStateChange() {
+
+    // Handle when the player has no lives
+    if (state->getLives() == 0) {
+        QMessageBox::StandardButton reply = QMessageBox::question(nullptr, "Game Over!", "You have lost! Do you want to play again?",
+                                                                  QMessageBox::Yes | QMessageBox::No);
+        if (reply == QMessageBox::Yes) {
+            state->setLives(SM.settings->value("levels/" + QString::number(state->getLevel()) + "/playerLives").toInt());
+            state->setLevel(1);
+            state->setIsGameOver(false);
+            state->setCoins(0);
+            startCurrentLevel();
+        } else {
+            QApplication::quit();
+        }
+
+    }
+
+    // Handle when the player has won
+    if (state->getLevel() == LEVELS.size() + 1) {
+        QMessageBox::StandardButton reply = QMessageBox::question(nullptr, "Congratulations!", "You have won! Do you want to play again?",
+                                                                  QMessageBox::Yes | QMessageBox::No);
+        if (reply == QMessageBox::Yes) {
+            state->setLevel(1);
+            state->setLives(SM.settings->value("levels/" + QString::number(state->getLevel()) + "/playerLives").toInt());
+            state->setIsGameOver(false);
+            state->setCoins(0);
+            startCurrentLevel();
+        } else {
+            QApplication::quit();
+        }
+
+    }
+
     coinsDisplayer->set(state->getCoins());
 }
 
@@ -248,7 +290,6 @@ void Game::createMap() {
     QString coinPath = SM.settings->value("coin/spriteSheet/1").toString();
     QString spike1Path = SM.settings->value("spikes/1").toString();
     QString block1Path= SM.settings->value("blocks/1").toString();
-    QString block2Path = SM.settings->value("blocks/2").toString();
     int blockWidth = SM.settings->value("blocks/width").toInt();
     int coinRatio = SM.settings->value("ratios/coin").toInt();
     int healthPotionRatio = SM.settings->value("ratios/healthPotion").toInt();
@@ -355,14 +396,27 @@ void Game::addElement(QGraphicsPixmapItem *element) {
 
 // Destructor
 Game::~Game() {
-    delete scene;
-    delete player;
-    delete state;
-    delete endFlag;
-    delete coinsDisplayer;
-    delete lifeDisplayer;
-    delete startingMenu;
+    if (level != nullptr)
+        delete level;
+    if (scene != nullptr)
+        delete scene;
+    if (player != nullptr)
+        delete player;
+    if (state != nullptr)
+        delete state;
+    if (endFlag != nullptr)
+        delete endFlag;
+    if (coinsDisplayer != nullptr)
+        delete coinsDisplayer;
+    if (lifeDisplayer != nullptr)
+        delete lifeDisplayer;
+    if (score != nullptr)
+        delete score;
+    if (startingMenu != nullptr)
+        delete startingMenu;
     for (auto element : elements)
-        delete element;
+        if (element != nullptr)
+            delete element;
 
+    delete this;
 }

@@ -361,15 +361,6 @@ void Player::handleDying() {
     // decrease the player's lives
     game->state->decrementLives();
 
-    // Handle game over (no more lives)
-    if (game->state->getLives() < 1){
-        QMessageBox::information(nullptr, "Game Over", "You lost! Your final score is: " + QString::number(game->score->getScore()));
-        game->scene->clear();
-        QCoreApplication::quit();
-        exit(EXIT_FAILURE);
-
-    }
-
     // One time die
     die();
 }
@@ -380,7 +371,8 @@ void Player::die() {
     SP.dieSound->play();
 
     // Stop the dying after 225ms
-    QTimer::singleShot(225, this, &Player::stopDying);
+    if (game->state->getLives() > 0)
+        QTimer::singleShot(225, this, &Player::stopDying);
 
 }
 
@@ -672,9 +664,15 @@ int Player::xCenter() {
 
 // Destructor
 Player::~Player() {
-    delete jumpTimer;
-    delete walkTimer;
-    delete fallTimer;
-    delete collisionTimer;
-    delete shield;
+    if (walkTimer != nullptr)
+        delete walkTimer;
+    if (jumpTimer != nullptr)
+        delete jumpTimer;
+    if (fallTimer != nullptr)
+        delete fallTimer;
+    if (collisionTimer != nullptr)
+        delete collisionTimer;
+    if (shield != nullptr)
+        delete shield;
+
 }

@@ -1,6 +1,5 @@
 #ifndef STATE_H
 #define STATE_H
-#include"score.h"
 #include "qobject.h"
 
 class State : public QObject

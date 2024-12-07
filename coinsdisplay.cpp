@@ -63,5 +63,6 @@ void CoinsDisplay::updateText() {
 
 // Destructor
 CoinsDisplay::~CoinsDisplay() {
-    delete coinImage;
+    if (coinImage != nullptr)
+        delete coinImage;
 }

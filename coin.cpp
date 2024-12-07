@@ -35,21 +35,6 @@ Coin::Coin( qreal x , qreal y , qreal scale , qreal value, QString spriteSheetPa
     setScale(scale);
     // Set the value
     this->value = value;
-    // Set the sound
-    setRandomSound();
-}
-
-Coin::~Coin()
-{
-    // Delete the coin
-    coinSound->deleteLater();
-}
-
-void Coin::setRandomSound()
-{
-    // Set the sound
-    int mx = getSoundPaths().size() - 1;
-    this->coinSound = new Sound(getSoundPaths()[RandomNumber(0 ,mx)], getVolume() , QMediaPlayer::Loops::Once);
 }
 
 qreal Coin::getValue() const
